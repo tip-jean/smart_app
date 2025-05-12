@@ -1,0 +1,30 @@
+// Top-level build file where you can add global configuration options
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.3.0' // Ensure correct Gradle plugin version
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = "../build"
+
+// Ensure correct structure for subprojects
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+    project.evaluationDependsOn(":app")
+}
+
+// Register the clean task properly
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
